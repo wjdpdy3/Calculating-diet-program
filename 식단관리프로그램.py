@@ -35,9 +35,11 @@ def start():
 
     if gender.get() == "남자":
         basal_metabolism = 66 + (13.7*n_weigth) + (5*n_height) - (6.8*n_age)
+        e_metabolism.delete(0,END)
         e_metabolism.insert(0,str(round(basal_metabolism))+" kcal")
     elif gender.get() == "여자":
         basal_metabolism = 655 + (9.6 * n_weigth) + (1.7*n_height) - (4.7*n_age)
+        e_metabolism.delete(0,END)
         e_metabolism.insert(0,str(round(basal_metabolism))+" kcal")
 
     # opt_active = ["거의없음", "조금있다", "보통", "꽤 있다", "아주 많다"]
@@ -56,24 +58,30 @@ def start():
 
     if percent.get() == "-20%":
         goal_calorie = basal_metabolism - basal_metabolism * 0.2
-    elif percent.get() == "-20%":
+    elif percent.get() == "-10%":
         goal_calorie = basal_metabolism - basal_metabolism * 0.1
     elif percent.get() == "+10%":
         goal_calorie = basal_metabolism + basal_metabolism * 0.1
     elif percent.get() == "+20%":
         goal_calorie = basal_metabolism + basal_metabolism * 0.2
 
+    e_day_calorie.delete(0,END)
     e_day_calorie.insert(0,str(round(goal_calorie))+" kcal")
 
     n_carbohydrate = goal_calorie * 0.5 / 4
     n_protein = goal_calorie * 0.3 / 4
     n_fat = goal_calorie * 0.2 / 9
 
+    total_carbohydrate_e.delete(0,END)
+    total_protein_e.delete(0,END)
+    total_fat_e.delete(0,END)
     total_carbohydrate_e.insert(0,"{:.1f}".format(n_carbohydrate)+"g")
     total_protein_e.insert(0,"{:.1f}".format(n_protein)+"g")
     total_fat_e.insert(0,"{:.1f}".format(n_fat)+"g")
 
-
+    one_carbohydrate_e.delete(0,END)
+    one_protein_e.delete(0,END)
+    one_fat_e.delete(0,END)
     one_carbohydrate_e.insert(0,"{:.1f}".format(n_carbohydrate/meals_num_var.get())+"g")
     one_protein_e.insert(0,"{:.1f}".format(n_protein/meals_num_var.get())+"g")
     one_fat_e.insert(0,"{:.1f}".format(n_fat/meals_num_var.get())+"g")
